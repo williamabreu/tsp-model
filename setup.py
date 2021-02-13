@@ -5,6 +5,9 @@
 # 
 # -- Run unit tests:
 #   python3 setup.py test
+# 
+# -- Run source from command-line:
+#   python3 -m tspmodel
 
 
 import setuptools
