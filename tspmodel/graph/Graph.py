@@ -1,5 +1,4 @@
 from tspmodel.json.JsonSerializable import JsonSerializable
-from tspmodel.json.JsonEncoder import JsonEncoder
 from tspmodel.graph.Edge import Edge
 from tspmodel.graph.Vertex import Vertex
 import json
@@ -23,6 +22,3 @@ class Graph(JsonSerializable):
     def num_edges(self) -> int:
         """Returns the number of edges from the graph"""
         pass
-
-    def __str__(self) -> str:
-        return json.dumps(self, cls=JsonEncoder, sort_keys=True, indent=4)

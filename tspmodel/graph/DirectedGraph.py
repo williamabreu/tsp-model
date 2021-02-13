@@ -1,5 +1,5 @@
 from copy import copy
-from tspmodel.json.JsonTyping import Json_T
+from tspmodel.json.JsonSerializable import Json_T
 from tspmodel.graph.Graph import Graph
 from tspmodel.graph.Edge import Edge
 from tspmodel.graph.Vertex import Vertex

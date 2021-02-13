@@ -1,4 +1,4 @@
-from tspmodel.json.JsonTyping import Json_T
+from tspmodel.json.JsonSerializable import Json_T
 
 
 class Vertex:
