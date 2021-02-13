@@ -9,11 +9,9 @@
 
 import setuptools
 
-# Change the 'project_name' here to the correct one.
-from src import __version__
+from tspmodel import __version__
 
-# Set the project name here.
-PROJECT_NAME = 'src'
+PROJECT_NAME = 'tspmodel'
 
 setuptools.setup(
     name=PROJECT_NAME,
@@ -24,7 +22,7 @@ setuptools.setup(
     description='Final project for master\'s discipline Algorithm Analysis and Data Structures',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
-    url='https://github.com/williamabreu/graph-tsp',
+    url='https://github.com/williamabreu/tsp-model',
     install_requires=open('requirements.txt').read().splitlines(),
     platforms='any',
     packages=setuptools.find_packages('.', exclude=(f'{PROJECT_NAME}.tests',)),
