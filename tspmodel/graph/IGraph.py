@@ -1,4 +1,5 @@
-from tspmodel.graph import Edge, Vertex
+from tspmodel.graph.Edge import Edge
+from tspmodel.graph.Vertex import Vertex
 
 class IGraph:
     """Interface Graph"""

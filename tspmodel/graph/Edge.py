@@ -1,4 +1,4 @@
-from tspmodel.graph import Vertex
+from tspmodel.graph.Vertex import Vertex
 
 
 class Edge:
