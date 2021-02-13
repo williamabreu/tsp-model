@@ -10,10 +10,10 @@
 import setuptools
 
 # Change the 'project_name' here to the correct one.
-from project_name import __version__
+from src import __version__
 
 # Set the project name here.
-PROJECT_NAME = 'project_name'
+PROJECT_NAME = 'src'
 
 setuptools.setup(
     name=PROJECT_NAME,
@@ -21,27 +21,24 @@ setuptools.setup(
     license='MIT License',
     author='William Abreu',
     author_email='contato@williamabreu.net',
-    description='Summarize your project purpose here',
+    description='Final project for master\'s discipline Algorithm Analysis and Data Structures',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
-    url='https://github.com/williamabreu/python-baseline',
+    url='https://github.com/williamabreu/graph-tsp',
     install_requires=open('requirements.txt').read().splitlines(),
     platforms='any',
     packages=setuptools.find_packages('.', exclude=(f'{PROJECT_NAME}.tests',)),
-    python_requires='>=3.7',
+    python_requires='>=3.9',
     test_suite=f'{PROJECT_NAME}.tests',
-    keywords='',
+    keywords='graph algorithms tsp optimization',
     entry_points={
         'console_scripts': [
             f'{PROJECT_NAME}={PROJECT_NAME}.__main__:main'
         ]
     },
     classifiers=[
-        'Environment :: Console',
         'Programming Language :: Python :: 3 :: Only',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
-        'Topic :: Software Development :: Libraries :: Python Modules',
-        'Topic :: Utilities',
     ],
 )
