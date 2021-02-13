@@ -14,7 +14,17 @@ No entanto, Carlos não quer fazer esse tour deliberadamente: ele quer encontrar
 
 ## Time-Complexity Requirement
 
-- Let $n$ the number of points in the cartesian plan, the algorithm must run under $O(n^2)$ steps.
+- Let `n` the number of points in the cartesian plan, the algorithm must run under `O(n²)` steps.
+
+## I/O Specification
+
+#### Input
+
+> The fisrt line has the number of points. Each following line has the 2D coordinate of each point.
+
+#### Output
+
+> The movement cost, rounded by 2 decimal places.
 
 ## Example 1
 
