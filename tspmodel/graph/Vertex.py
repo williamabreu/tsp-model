@@ -1,7 +1,7 @@
-from tspmodel.json.JsonSerializable import Json_T
+from tspmodel.json.JsonSerializable import JsonSerializable, Json_T
 
 
-class Vertex:
+class Vertex(JsonSerializable):
     def __init__(self, id: int) -> None:
         """A vertex 'u' from the graph"""
         self.__id: int = id
