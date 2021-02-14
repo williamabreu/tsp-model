@@ -1,7 +1,6 @@
 from tspmodel.json.JsonSerializable import JsonSerializable
 from tspmodel.graph.Edge import Edge
 from tspmodel.graph.Vertex import Vertex
-import json
 
 
 class Graph(JsonSerializable):
