@@ -6,6 +6,7 @@ class Vertex(JsonSerializable):
         """A vertex 'u' from the graph"""
         self.__id__: int = id
         self.__cost__: float = None
+        self.__coord__: tuple[float, float] = None
 
     def id(self) -> int:
         """Returns the id of the vertex"""
@@ -18,6 +19,15 @@ class Vertex(JsonSerializable):
     def set_cost(self, cost: float) -> "Vertex":
         """Store the cost in the vertex"""
         self.__cost__: float = cost
+        return self
+    
+    def coordinate(self) -> tuple[float, float]:
+        """Returns the coordinate (x, y) of the vertex"""
+        return self.__coord__
+    
+    def set_coordinate(self, x: float, y: float) -> "Vertex":
+        """Store the coordinate (x, y) of the vertex"""
+        self.__coord__ = (x, y)
         return self
 
     def json(self) -> Json_T:
