@@ -1,20 +1,21 @@
 # Usage: 
 #
 # -- Build the project for distribution:
-#   python3 setup.py sdist bdist_wheel
+#   python setup.py sdist bdist_wheel
 # 
 # -- Run unit tests:
-#   python3 setup.py test
+#   python setup.py test
 # 
 # -- Run source from command-line:
-#   python3 -m tspmodel
+#   python -m tspmodel
 
 
 import setuptools
-
 from tspmodel import __version__
 
+
 PROJECT_NAME = 'tspmodel'
+
 
 setuptools.setup(
     name=PROJECT_NAME,

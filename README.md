@@ -18,15 +18,13 @@ No entanto, Carlos não quer fazer esse tour deliberadamente: ele quer encontrar
 
 ## I/O Specification
 
-#### Input
+- **Input:** The fisrt line has the number of points. Each following line has the 2D coordinate of each point.
 
-> The fisrt line has the number of points. Each following line has the 2D coordinate of each point.
+- **Output:** The movement cost, rounded by 2 decimal places.
 
-#### Output
+-----
 
-> The movement cost, rounded by 2 decimal places.
-
-## Example 1
+### Example 1
 
 #### Input 
 
@@ -42,7 +40,10 @@ No entanto, Carlos não quer fazer esse tour deliberadamente: ele quer encontrar
 ```
 6.47
 ```
-## Example 2
+
+-----
+
+### Example 2
 
 #### Input
 
@@ -60,7 +61,9 @@ No entanto, Carlos não quer fazer esse tour deliberadamente: ele quer encontrar
 7.89
 ```
 
-## Example 3
+-----
+
+### Example 3
 
 #### Input
 
