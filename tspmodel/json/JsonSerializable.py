@@ -1,8 +1,8 @@
 from json import JSONEncoder, dumps
-from typing import Iterable, Type, NewType
+from typing import Iterable, Type, NewType, Union
 
 
-Json_T: Type = NewType('Json_T', tp=[int, float, bool, str, Iterable, dict])
+Json_T: Type = NewType('Json_T', tp=Union[int, float, bool, str, Iterable, dict])
 
 
 class JsonSerializable:
