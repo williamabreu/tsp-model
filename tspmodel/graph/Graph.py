@@ -23,7 +23,8 @@ class Graph(JsonSerializable):
     def add_edge(self, edge: Edge) -> "Graph":
         """Add an edge in the graph and returns itself for chaining"""
         if self.__vgraph__:
-            self.__vgraph__.add_edge(*edge.vertices())
+            u, v = edge.vertices()
+            self.__vgraph__.add_edge(u.id(), v.id())
         self.__edge_count__ += 1
         return self.__add_edge__(edge)
     
