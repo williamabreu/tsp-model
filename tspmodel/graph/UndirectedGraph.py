@@ -6,8 +6,8 @@ from tspmodel.graph.Vertex import Vertex
 
 
 class UndirectedGraph(AdjListGraph):
-    def __init__(self, visual_mode: bool = False) -> None:
-        super().__init__(visual_mode)
+    def __init__(self) -> None:
+        super().__init__()
 
     def __add_edge(self, edge: Edge) -> Graph:
         vertex1, vertex2 = edge.vertices()

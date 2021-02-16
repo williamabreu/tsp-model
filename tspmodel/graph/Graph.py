@@ -2,13 +2,14 @@ from tspmodel.visualization.VisualGraph import VisualGraph
 from tspmodel.json.JsonSerializable import JsonSerializable
 from tspmodel.graph.Edge import Edge
 from tspmodel.graph.Vertex import Vertex
+from tspmodel.settings import VISUAL_MODE
 
 
 class Graph(JsonSerializable):
     """Abstract Graph"""
 
-    def __init__(self, visual_mode: bool) -> None:
-        self.__vgraph: VisualGraph = VisualGraph() if visual_mode else None
+    def __init__(self) -> None:
+        self.__vgraph: VisualGraph = VisualGraph() if VISUAL_MODE else None
         self.__vertex_set: set[int] = set()
         self.__edge_count: int = 0
     

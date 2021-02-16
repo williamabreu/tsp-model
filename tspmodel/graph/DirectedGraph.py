@@ -6,8 +6,8 @@ from tspmodel.graph.Vertex import Vertex
 
 
 class DirectedGraph(AdjListGraph):
-    def __init__(self, visual_mode: bool = False) -> None:
-        super().__init__(visual_mode)
+    def __init__(self) -> None:
+        super().__init__()
         self.__transpose_adj_list: AdjList_T = {}
 
     def __add_edge(self, edge: Edge) -> Graph:

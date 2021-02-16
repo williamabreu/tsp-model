@@ -11,8 +11,8 @@ AdjList_T: Type = NewType('AdjList_T', tp=dict[Vertex, list[Vertex]])
 class AdjListGraph(Graph):
     """Abstract Graph implemented with hash-table as adjacency list"""
 
-    def __init__(self, visual_mode: bool) -> None:
-        super().__init__(visual_mode)
+    def __init__(self) -> None:
+        super().__init__()
         self.__adj_list: AdjList_T = {}
 
     def _adjlist(self) -> AdjList_T:
