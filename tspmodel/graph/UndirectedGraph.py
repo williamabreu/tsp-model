@@ -1,5 +1,4 @@
-from copy import copy
-from tspmodel.graph.AdjListGraph import AdjListGraph, AdjList_T
+from tspmodel.graph.AdjListGraph import AdjListGraph
 from tspmodel.json.JsonSerializable import Json_T
 from tspmodel.graph.Graph import Graph
 from tspmodel.graph.Edge import Edge
