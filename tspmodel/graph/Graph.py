@@ -18,7 +18,7 @@ class Graph(JsonSerializable):
             if vertex.id() not in self.__vertex_set: 
                 self.__vgraph.add_node(vertex.id(), vertex.coordinate())
         self.__vertex_set.add(vertex.id())
-        return self.__add_vertex__(vertex)
+        return self.__add_vertex(vertex)
 
     def add_edge(self, edge: Edge) -> "Graph":
         """Add an edge in the graph and returns itself for chaining"""
@@ -26,7 +26,7 @@ class Graph(JsonSerializable):
             u, v = edge.vertices()
             self.__vgraph.add_edge(u.id(), v.id())
         self.__edge_count += 1
-        return self.__add_edge__(edge)
+        return self.__add_edge(edge)
     
     def num_vertices(self) -> int:
         """Returns the number of vertices from the graph"""
@@ -40,11 +40,11 @@ class Graph(JsonSerializable):
         """Returns the list of neighbors of the vertex"""
         pass
 
-    def __add_vertex__(self, vertex: Vertex) -> "Graph":
+    def __add_vertex(self, vertex: Vertex) -> "Graph":
         """Must be implemented in the children classes"""
         pass
 
-    def __add_edge__(self, edge: Edge) -> "Graph":
+    def __add_edge(self, edge: Edge) -> "Graph":
         """Must be implemented in the children classes"""
         pass
 

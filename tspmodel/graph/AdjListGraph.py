@@ -13,23 +13,29 @@ class AdjListGraph(Graph):
 
     def __init__(self, visual_mode: bool) -> None:
         super().__init__(visual_mode)
-        self.__adj_list__: AdjList_T = {}
+        self.__adj_list: AdjList_T = {}
+
+    def _adjlist(self) -> AdjList_T:
+        return self.__adj_list
     
-    def __add_vertex__(self, vertex: Vertex) -> "Graph":
+    def __add_vertex(self, vertex: Vertex) -> "Graph":
         return self
     
-    def __insert_into_adjlist__(self, u: Vertex, v: Vertex, w: float, adj_list: AdjList_T) -> None:
+    @staticmethod
+    def _insert_into_adjlist(u: Vertex, v: Vertex, w: float, adj_list: AdjList_T) -> None:
         adj_vertex = copy(v).set_cost(w)
         if u in adj_list:
             adj_list[u].append(adj_vertex)
         else:
             adj_list[u] = [adj_vertex]
     
-    def __neighbors__(self, u: Vertex, adj_list: AdjList_T) -> list[Vertex]:
+    @staticmethod
+    def _neighbors(u: Vertex, adj_list: AdjList_T) -> list[Vertex]:
         if u in adj_list:
             return adj_list[u]
         else:
             return []
     
-    def __build_adjlist_json__(self, adj_list) -> Json_T:
+    @staticmethod
+    def _build_adjlist_json(adj_list) -> Json_T:
         return { u.id(): [v.json() for v in adj_list[u]] for u in adj_list }

@@ -9,15 +9,15 @@ class UndirectedGraph(AdjListGraph):
     def __init__(self, visual_mode: bool = False) -> None:
         super().__init__(visual_mode)
 
-    def __add_edge__(self, edge: Edge) -> Graph:
+    def __add_edge(self, edge: Edge) -> Graph:
         vertex1, vertex2 = edge.vertices()
         weight = edge.weight()
-        self.__insert_into_adjlist__(vertex1, vertex2, weight, self.__adj_list__)
-        self.__insert_into_adjlist__(vertex2, vertex1, weight, self.__adj_list__)
+        AdjListGraph._insert_into_adjlist(vertex1, vertex2, weight, self._adjlist())
+        AdjListGraph._insert_into_adjlist(vertex2, vertex1, weight, self._adjlist())
         return self
 
     def neighborhood(self, vertex: Vertex) -> list[Vertex]:
-        return self.__neighbors__(vertex, self.__adj_list__)
+        return AdjListGraph._neighbors(vertex, self._adjlist())
 
     def json(self) -> Json_T:
-        return self.__build_adjlist_json__(self.__adj_list__)
+        return AdjListGraph._build_adjlist_json(self._adjlist())
