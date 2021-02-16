@@ -6,8 +6,8 @@ from tspmodel.util.Geometry import distance_vertex
 
 
 class TspSolverGreedy(TspSolver):
-    def __init__(self, vertices: list[Vertex], visual_mode: bool = False) -> None:
-        super().__init__(vertices, DirectedGraph(visual_mode))
+    def __init__(self, vertices: list[Vertex]) -> None:
+        super().__init__(vertices, DirectedGraph())
         self.__solution: float = 0.0
     
     def solution(self) -> float:
