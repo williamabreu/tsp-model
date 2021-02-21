@@ -7,6 +7,7 @@ class Vertex(JsonSerializable):
         self.__id: int = id
         self.__cost: float = None
         self.__coord: tuple[float, float] = None
+        self.__attrs: dict[str, object] = {}
 
     def id(self) -> int:
         """Returns the id of the vertex"""
@@ -47,9 +48,18 @@ class Vertex(JsonSerializable):
 
     def __eq__(self, o: "Vertex") -> bool:
         return self.__id == o.id()
+    
+    def __ne__(self, o: "Vertex") -> bool:
+        return self.__id != o.id()
 
     def __ge__(self, o: "Vertex") -> bool:
         return self.__id >= o.id()
 
     def __gt__(self, o: "Vertex") -> bool:
         return self.__id > o.id()
+    
+    def __getitem__(self, key: str) -> object:
+        return self.__attrs.get(key, None)
+    
+    def __setitem__(self, key: str, value: object) -> None:
+        self.__attrs[key] = value
