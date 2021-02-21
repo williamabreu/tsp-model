@@ -10,14 +10,14 @@
 #   python -m tspmodel
 
 
-import setuptools
+from setuptools import setup, find_packages
 from tspmodel import __version__
 
 
 PROJECT_NAME = 'tspmodel'
 
 
-setuptools.setup(
+setup(
     name=PROJECT_NAME,
     version=__version__,
     license='MIT License',
@@ -29,7 +29,7 @@ setuptools.setup(
     url='https://github.com/williamabreu/tsp-model',
     install_requires=open('requirements.txt').read().splitlines(),
     platforms='any',
-    packages=setuptools.find_packages('.', exclude=(f'{PROJECT_NAME}.tests',)),
+    packages=find_packages('.', exclude=(f'{PROJECT_NAME}.tests',)),
     python_requires='>=3.9',
     test_suite=f'{PROJECT_NAME}.tests',
     keywords='graph algorithms tsp optimization',
