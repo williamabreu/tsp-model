@@ -16,7 +16,7 @@ class TspSolverFactorial(TspSolver):
     def solution(self) -> float:
         return self.__solution
     
-    def solve(self, src_vertex: Vertex) -> TspSolver:
+    def solve(self) -> TspSolver:
         vertices_base = deepcopy(self.vertices())
         for vertices in permutations(vertices_base):
             edges = []

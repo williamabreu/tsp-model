@@ -21,5 +21,5 @@ class TspSolver:
     def solution(self) -> float:
         pass
 
-    def solve(self, src_vertex: Vertex) -> "TspSolver":
+    def solve(self) -> "TspSolver":
         pass
