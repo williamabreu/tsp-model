@@ -68,7 +68,7 @@ No entanto, Carlos não quer fazer esse tour deliberadamente: ele quer encontrar
 #### Input
 
 ```
-6
+7
 0 6
 1 0
 2 3
