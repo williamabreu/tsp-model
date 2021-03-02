@@ -5,7 +5,7 @@ from tspmodel.algorithm.TspSolver import TspSolver
 from tspmodel.util.Geometry import distance_vertex
 
 
-class TspSolverGreedy(TspSolver):
+class TspSolverSequential(TspSolver):
     def __init__(self, vertices: list[Vertex]) -> None:
         super().__init__(vertices, DirectedGraph())
         self.__solution: float = float('inf')
@@ -14,6 +14,7 @@ class TspSolverGreedy(TspSolver):
         return self.__solution
 
     def solve(self, src_vertex: Vertex) -> TspSolver:
+        self.__solution = 0.0
         graph = self.graph()
         vertices = self.vertices()
         next = src_vertex
