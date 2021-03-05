@@ -9,7 +9,7 @@ class UndirectedGraph(AdjListGraph):
     def __init__(self) -> None:
         super().__init__()
 
-    def __add_edge(self, edge: Edge) -> Graph:
+    def _add_edge(self, edge: Edge) -> Graph:
         vertex1, vertex2 = edge.vertices()
         weight = edge.weight()
         AdjListGraph._insert_into_adjlist(vertex1, vertex2, weight, self._adjlist())

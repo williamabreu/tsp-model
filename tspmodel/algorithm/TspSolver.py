@@ -1,8 +1,12 @@
+from abc import ABCMeta, abstractmethod
 from tspmodel.graph.Graph import Graph
 from tspmodel.graph.Vertex import Vertex
+from tspmodel.messages import ABSTRACT_METHOD_ERROR_MSG
 
 
 class TspSolver:
+    __metaclass__ = ABCMeta
+
     def __init__(self, vertices: list[Vertex], graph: Graph) -> None:
         self.__vertices: list[Vertex] = vertices
         self.__graph: Graph = graph
@@ -18,8 +22,10 @@ class TspSolver:
     def vertices(self) -> list[Vertex]:
         return self.__vertices
     
+    @abstractmethod
     def solution(self) -> float:
-        pass
+        raise NotImplementedError(ABSTRACT_METHOD_ERROR_MSG)
 
+    @abstractmethod
     def solve(self) -> "TspSolver":
-        pass
+        raise NotImplementedError(ABSTRACT_METHOD_ERROR_MSG)

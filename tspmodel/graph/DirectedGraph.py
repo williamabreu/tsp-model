@@ -10,7 +10,7 @@ class DirectedGraph(AdjListGraph):
         super().__init__()
         self.__transpose_adj_list: AdjList_T = {}
 
-    def __add_edge(self, edge: Edge) -> Graph:
+    def _add_edge(self, edge: Edge) -> Graph:
         vertex1, vertex2 = edge.vertices()
         weight = edge.weight()
         AdjListGraph._insert_into_adjlist(vertex1, vertex2, weight, self._adjlist())

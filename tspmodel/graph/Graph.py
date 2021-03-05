@@ -1,12 +1,15 @@
+from abc import ABCMeta, abstractmethod
 from tspmodel.visualization.VisualGraph import VisualGraph
 from tspmodel.json.JsonSerializable import JsonSerializable
 from tspmodel.graph.Edge import Edge
 from tspmodel.graph.Vertex import Vertex
 from tspmodel.settings import VISUAL_MODE
+from tspmodel.messages import ABSTRACT_METHOD_ERROR_MSG
 
 
 class Graph(JsonSerializable):
     """Abstract Graph"""
+    __metaclass__ = ABCMeta
 
     def __init__(self) -> None:
         self.__vgraph: VisualGraph = VisualGraph() if VISUAL_MODE else None
@@ -19,7 +22,7 @@ class Graph(JsonSerializable):
             if vertex.id() not in self.__vertex_set: 
                 self.__vgraph.add_node(vertex.id(), vertex.coordinate())
         self.__vertex_set.add(vertex.id())
-        return self.__add_vertex(vertex)
+        return self._add_vertex(vertex)
 
     def add_edge(self, edge: Edge) -> "Graph":
         """Add an edge in the graph and returns itself for chaining"""
@@ -27,7 +30,7 @@ class Graph(JsonSerializable):
             u, v = edge.vertices()
             self.__vgraph.add_edge(u.id(), v.id())
         self.__edge_count += 1
-        return self.__add_edge(edge)
+        return self._add_edge(edge)
     
     def num_vertices(self) -> int:
         """Returns the number of vertices from the graph"""
@@ -37,17 +40,18 @@ class Graph(JsonSerializable):
         """Returns the number of edges from the graph"""
         return self.__edge_count
     
+    @abstractmethod
     def neighborhood(self, vertex: Vertex) -> list[Vertex]:
         """Returns the list of neighbors of the vertex"""
-        pass
+        raise NotImplementedError(ABSTRACT_METHOD_ERROR_MSG)
 
-    def __add_vertex(self, vertex: Vertex) -> "Graph":
-        """Must be implemented in the children classes"""
-        pass
+    @abstractmethod
+    def _add_vertex(self, vertex: Vertex) -> "Graph":
+        raise NotImplementedError(ABSTRACT_METHOD_ERROR_MSG)
 
-    def __add_edge(self, edge: Edge) -> "Graph":
-        """Must be implemented in the children classes"""
-        pass
+    @abstractmethod
+    def _add_edge(self, edge: Edge) -> "Graph":
+        raise NotImplementedError(ABSTRACT_METHOD_ERROR_MSG)
 
     def __repr__(self) -> str:
         if self.__vgraph: self.__vgraph.display()

@@ -1,3 +1,4 @@
+from abc import ABCMeta
 from copy import copy
 from tspmodel.json.JsonSerializable import Json_T
 from typing import NewType, Type
@@ -10,6 +11,7 @@ AdjList_T: Type = NewType('AdjList_T', tp=dict[Vertex, list[Vertex]])
 
 class AdjListGraph(Graph):
     """Abstract Graph implemented with hash-table as adjacency list"""
+    __metaclass__ = ABCMeta
 
     def __init__(self) -> None:
         super().__init__()
@@ -18,7 +20,7 @@ class AdjListGraph(Graph):
     def _adjlist(self) -> AdjList_T:
         return self.__adj_list
     
-    def __add_vertex(self, vertex: Vertex) -> "Graph":
+    def _add_vertex(self, vertex: Vertex) -> "Graph":
         return self
     
     @staticmethod
