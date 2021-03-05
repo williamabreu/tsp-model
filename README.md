@@ -83,3 +83,7 @@ No entanto, Carlos não quer fazer esse tour deliberadamente: ele quer encontrar
 ```
 25.58
 ```
+
+The last example fits as follow:
+
+![img](docs/img/example-3-solution.png)
