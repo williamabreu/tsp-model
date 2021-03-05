@@ -75,8 +75,8 @@ class TspSolverParticular(TspSolver):
         sorted_vertices = self.__sorted_vertices_by_xaxis(self.vertices())
         further_west = sorted_vertices[0]
         further_east = sorted_vertices[-1]
-        is_right_direction = lambda x0, x1: x0 < x1
-        is_left_direction = lambda x0, x1: x0 > x1
+        is_right_direction = lambda x0, x1: x0 <= x1
+        is_left_direction = lambda x0, x1: x0 >= x1
         
         self.__solution += self.__find_subpath(further_west, further_east, is_right_direction, final_graph)
         self.__solution += self.__find_subpath(further_east, further_west, is_left_direction, final_graph)
