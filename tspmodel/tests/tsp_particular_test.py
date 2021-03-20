@@ -19,3 +19,4 @@ class TestTspParticular(TestCase):
         self.assertEqual(main('tspmodel/tests/testcases/input1.txt'), '6.47')
         self.assertEqual(main('tspmodel/tests/testcases/input2.txt'), '7.89')
         self.assertEqual(main('tspmodel/tests/testcases/input3.txt'), '25.58')
+        self.assertEqual(main('tspmodel/tests/testcases/input4.txt'), '47.32')
