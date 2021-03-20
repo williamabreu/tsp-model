@@ -1,12 +1,10 @@
 from abc import ABCMeta
 from copy import copy
-from tspmodel.json.JsonSerializable import Json_T
-from typing import NewType, Type
+from bisect import bisect
+from tspmodel.json.Types import Json_T
+from tspmodel.graph.Types import AdjList_T
 from tspmodel.graph.Graph import Graph
 from tspmodel.graph.Vertex import Vertex
-
-
-AdjList_T: Type = NewType('AdjList_T', tp=dict[Vertex, list[Vertex]])
 
 
 class AdjListGraph(Graph):
@@ -19,10 +17,10 @@ class AdjListGraph(Graph):
 
     def _adjlist(self) -> AdjList_T:
         return self.__adj_list
-    
+
     def _add_vertex(self, vertex: Vertex) -> "Graph":
         return self
-    
+
     @staticmethod
     def _insert_into_adjlist(u: Vertex, v: Vertex, w: float, adj_list: AdjList_T) -> None:
         adj_vertex = copy(v).set_cost(w)
@@ -30,14 +28,14 @@ class AdjListGraph(Graph):
             adj_list[u].append(adj_vertex)
         else:
             adj_list[u] = [adj_vertex]
-    
+
     @staticmethod
     def _neighbors(u: Vertex, adj_list: AdjList_T) -> list[Vertex]:
         if u in adj_list:
             return adj_list[u]
         else:
             return []
-    
+
     @staticmethod
     def _build_adjlist_json(adj_list) -> Json_T:
         return { u.id(): [v.json() for v in adj_list[u]] for u in adj_list }

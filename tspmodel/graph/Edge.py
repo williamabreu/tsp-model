@@ -1,5 +1,5 @@
+from tspmodel.json.Types import Json_T
 from tspmodel.json.JsonSerializable import JsonSerializable
-from tspmodel.json.JsonSerializable import Json_T
 from tspmodel.graph.Vertex import Vertex
 
 
@@ -25,6 +25,6 @@ class Edge(JsonSerializable):
     def weight(self) -> float:
         """Returns the weight 'w' of the edge"""
         return self.__weight
-    
+
     def json(self) -> Json_T:
-        return (self.__vertex_src, self.__vertex_dst, self.__weight)  
+        return (self.__vertex_src, self.__vertex_dst, self.__weight)

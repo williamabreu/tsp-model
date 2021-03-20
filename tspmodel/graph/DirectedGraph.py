@@ -1,5 +1,6 @@
-from tspmodel.graph.AdjListGraph import AdjListGraph, AdjList_T
-from tspmodel.json.JsonSerializable import Json_T
+from tspmodel.json.Types import Json_T
+from tspmodel.graph.Types import AdjList_T
+from tspmodel.graph.AdjListGraph import AdjListGraph
 from tspmodel.graph.Graph import Graph
 from tspmodel.graph.Edge import Edge
 from tspmodel.graph.Vertex import Vertex
@@ -27,7 +28,7 @@ class DirectedGraph(AdjListGraph):
     def predecessors(self, vertex: Vertex) -> list[Vertex]:
         """Returns the list of vertices that have the vertex as next hop"""
         return AdjListGraph._neighbors(vertex, self.__transpose_adj_list)
-    
+
     def json(self) -> Json_T:
         return {
             'adjList': AdjListGraph._build_adjlist_json(self._adjlist()),
