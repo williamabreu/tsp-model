@@ -25,7 +25,9 @@ class AdjListGraph(Graph):
     def _insert_into_adjlist(u: Vertex, v: Vertex, w: float, adj_list: AdjList_T) -> None:
         adj_vertex = copy(v).set_cost(w)
         if u in adj_list:
-            adj_list[u].append(adj_vertex)
+            # Keep sorted by cost (min to max)
+            index = bisect([x.cost() for x in adj_list[u]], adj_vertex.cost())
+            adj_list[u].insert(index, adj_vertex)
         else:
             adj_list[u] = [adj_vertex]
 
