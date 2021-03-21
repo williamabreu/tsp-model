@@ -1,10 +1,6 @@
 from unittest import TestCase
 from tspmodel.iohandler.FileInput import FileInput
 from tspmodel.algorithm.TspSolverParticular import TspSolverParticular
-from tspmodel.settings import VISUAL_MODE
-
-
-VISUAL_MODE = False
 
 
 def main(testcase_path: str) -> str:
