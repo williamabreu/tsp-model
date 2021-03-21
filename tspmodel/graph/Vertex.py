@@ -1,4 +1,6 @@
-from tspmodel.json.JsonSerializable import JsonSerializable, Json_T
+from tspmodel.json.Types import Json_T
+from tspmodel.util.Types import Point_T
+from tspmodel.json.JsonSerializable import JsonSerializable
 
 
 class Vertex(JsonSerializable):
@@ -6,7 +8,7 @@ class Vertex(JsonSerializable):
         """A vertex 'u' from the graph"""
         self.__id: int = id
         self.__cost: float = None
-        self.__coord: tuple[float, float] = None
+        self.__coord: Point_T = None
         self.__attrs: dict[str, object] = {}
 
     def id(self) -> int:
@@ -21,11 +23,11 @@ class Vertex(JsonSerializable):
         """Store the cost in the vertex"""
         self.__cost: float = cost
         return self
-    
-    def coordinate(self) -> tuple[float, float]:
+
+    def coordinate(self) -> Point_T:
         """Returns the coordinate (x, y) of the vertex"""
         return self.__coord
-    
+
     def set_coordinate(self, x: float, y: float) -> "Vertex":
         """Store the coordinate (x, y) of the vertex"""
         self.__coord = (x, y)
@@ -48,7 +50,7 @@ class Vertex(JsonSerializable):
 
     def __eq__(self, o: "Vertex") -> bool:
         return self.__id == o.id()
-    
+
     def __ne__(self, o: "Vertex") -> bool:
         return self.__id != o.id()
 
@@ -57,9 +59,9 @@ class Vertex(JsonSerializable):
 
     def __gt__(self, o: "Vertex") -> bool:
         return self.__id > o.id()
-    
+
     def __getitem__(self, key: str) -> object:
         return self.__attrs.get(key, None)
-    
+
     def __setitem__(self, key: str, value: object) -> None:
         self.__attrs[key] = value

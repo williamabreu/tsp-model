@@ -4,7 +4,10 @@ from tspmodel.graph.Edge import Edge
 from tspmodel.algorithm.TspSolver import TspSolver
 from tspmodel.graph.UndirectedGraph import UndirectedGraph
 from tspmodel.graph.Vertex import Vertex
-from tspmodel.util.Geometry import distance_vertex
+from tspmodel.util.Geometry import distance_vertex, intersects
+
+
+ADDED_KEY = 'added'
 
 
 class TspSolverParticular(TspSolver):
@@ -12,73 +15,92 @@ class TspSolverParticular(TspSolver):
         super().__init__(vertices, UndirectedGraph())
         self.__solution = float('inf')
         self.__complete_graph: Graph = UndirectedGraph()
+        self.__edge_stack: list[Edge] = []
+        self.__further_west: Vertex = None
+        self.__further_east: Vertex = None
+        self.__remaining_vertices: int = len(vertices)
+        self.__is_right_direction: FunctionType = lambda x0, x1: x0 <= x1
+        self.__is_left_direction: FunctionType = lambda x0, x1: x0 >= x1
         self.__build_complete_graph()
-    
+        self.__find_further_vertices()
+
     def __build_complete_graph(self) -> None:
         vertices = self.vertices()
         for i in range(len(vertices)):
             for j in range(i):
                 u = vertices[i]
                 v = vertices[j]
+                u[ADDED_KEY] = False
+                v[ADDED_KEY] = False
                 self.__complete_graph.add_vertex(u)
                 self.__complete_graph.add_vertex(v)
                 self.__complete_graph.add_edge(Edge(u, v, distance_vertex(u, v)))
-    
+
+    def __find_further_vertices(self) -> None:
+        sorted_vertices = self.__sorted_vertices_by_xaxis(self.vertices())
+        self.__further_west = sorted_vertices[0]
+        self.__further_east = sorted_vertices[-1]
+
     def __sorted_vertices_by_xaxis(self, vertices: list[Vertex]) -> list[Vertex]:
         return sorted(vertices, key=lambda x: x.coordinate())
-    
-    def __get_next_vertex(self, current: Vertex, excluded: Vertex, predicate: FunctionType) -> Vertex:
-        neighbors = self.__complete_graph.neighborhood(current)
-        min = Vertex(-1).set_cost(float('inf'))
-        x0 = current.coordinate()[0]
 
-        for vertex in neighbors:
-            # Check if the vertex...
-            #  - was not added to the solution
-            #  - is not the excluded from search (further west or east)
-            #  - has the coordinate following the direction (right or left)
-            #  - is the closest
-            #  - TODO: check if it do not make a crossing edge
-            
-            x1 = vertex.coordinate()[0]
-            
-            if not vertex['added'] and vertex != excluded and predicate(x0, x1) and vertex.cost() < min.cost():
-                min = vertex
+    def __is_crossed_edge(self, candidate: Edge,):
+        for edge in self.__edge_stack[1:]:
+            line0 = (edge.source_vertex().coordinate(), edge.destination_vertex().coordinate()) # Line segment edge list
+            line1 = (candidate.source_vertex().coordinate(), candidate.destination_vertex().coordinate()) # Line segment candidate edge
+            if intersects(line0, line1):
+                return True
+        return False
 
-        return min if min.cost() != float('inf') else None
+    def __find_path(self, before: Vertex, current: Vertex, is_keeping_direction: FunctionType) -> float:
+        current[ADDED_KEY] = True
+        self.__remaining_vertices -= 1
+        graph = self.graph()
 
-    def __find_subpath(self, current: Vertex, further: Vertex, predicate: FunctionType, graph: Graph) -> None:
-        cost = 0.0
-        current['added'] = True
-        next = self.__get_next_vertex(current, further, predicate)
-        
-        while next:
-            edge_cost = next.cost()
-            cost += edge_cost
-            graph.add_edge(Edge(current, next, edge_cost))
-            current = next
-            current['added'] = True
-            next = self.__get_next_vertex(current, further, predicate)
-        
-        edge_cost = distance_vertex(current, further)
-        cost += edge_cost
-        graph.add_edge(Edge(current, further, edge_cost))
-        
-        return cost
+        if current != self.__further_west and self.__is_crossed_edge(Edge(before, current)):
+            current[ADDED_KEY] = False
+            self.__remaining_vertices += 1
+            return float('inf')
+        elif self.__remaining_vertices == 0 and current == self.__further_west:
+            # found the solution!
+            w = distance_vertex(current, before)
+            graph.add_edge(Edge(before, current, w))
+            return w
+        else:
+            self.__edge_stack.insert(0, Edge(before, current))
+
+            if current == self.__further_east:
+                predicate = self.__is_left_direction # change the direction
+            else:
+                predicate = is_keeping_direction # keep the direction (starts following right direction from further_west)
+
+            for next in self.__complete_graph.neighborhood(current):
+                x0 = current.coordinate()[0]
+                x1 = next.coordinate()[0]
+
+                if not next[ADDED_KEY] and predicate(x0, x1):
+                    cost = self.__find_path(current, next, predicate)
+                    if cost != float('inf'):
+                        w = distance_vertex(current, before)
+                        graph.add_edge(Edge(before, current, w))
+                        return w + cost
+
+            current[ADDED_KEY] = False
+            self.__remaining_vertices += 1
+            self.__edge_stack.pop(0)
+            return float('inf')
 
     def solution(self) -> float:
         return self.__solution
 
     def solve(self) -> TspSolver:
-        self.__solution = 0.0
-        final_graph = self.graph()
-        sorted_vertices = self.__sorted_vertices_by_xaxis(self.vertices())
-        further_west = sorted_vertices[0]
-        further_east = sorted_vertices[-1]
-        is_right_direction = lambda x0, x1: x0 <= x1
-        is_left_direction = lambda x0, x1: x0 >= x1
-        
-        self.__solution += self.__find_subpath(further_west, further_east, is_right_direction, final_graph)
-        self.__solution += self.__find_subpath(further_east, further_west, is_left_direction, final_graph)
+        current = self.__further_west
+
+        for next in self.__complete_graph.neighborhood(current):
+            cost = self.__find_path(current, next, self.__is_right_direction)
+
+            if cost != float('inf'):
+                self.__solution = cost
+                break
 
         return self

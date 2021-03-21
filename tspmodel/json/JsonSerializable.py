@@ -1,10 +1,7 @@
 from abc import ABCMeta, abstractmethod
 from json import JSONEncoder, dumps
-from typing import Iterable, Type, NewType, Union
+from tspmodel.json.Types import Json_T
 from tspmodel.messages import ABSTRACT_METHOD_ERROR_MSG
-
-
-Json_T: Type = NewType('Json_T', tp=Union[int, float, bool, str, Iterable, dict])
 
 
 class JsonSerializable:

@@ -15,8 +15,14 @@ def main(testcase_path: str) -> str:
 
 
 class TestTspParticular(TestCase):
-    def test_examples(self) -> None:
+    def test_example_1(self) -> None:
         self.assertEqual(main('tspmodel/tests/testcases/input1.txt'), '6.47')
+
+    def test_example_2(self) -> None:
         self.assertEqual(main('tspmodel/tests/testcases/input2.txt'), '7.89')
+
+    def test_example_3(self) -> None:
         self.assertEqual(main('tspmodel/tests/testcases/input3.txt'), '25.58')
+
+    def test_example_4(self) -> None:
         self.assertEqual(main('tspmodel/tests/testcases/input4.txt'), '47.32')
